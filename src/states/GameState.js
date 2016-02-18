@@ -50,11 +50,11 @@ class GameState extends Phaser.State {
 			this.dog.body.velocity.x = 200;
 			this.dog.animations.play('walk', 10, true);
 		}
-		// // Don't move
-		// else {
-		// 	this.dog.body.velocity.x = 0;
-		// 	this.dog.animations.play('stand', 10, true);
-		// }
+		// Don't move
+		else {
+			this.dog.body.velocity.x = 0;
+			this.dog.animations.play('stand', 10, true);
+		}
 	}
 }
 
