@@ -2,7 +2,6 @@
 
 import Phaser from 'phaser';
 const SPEED = 200;
-let jumping = false;
 
 export class Dog extends Phaser.Sprite {
     constructor(game, x, y) {
@@ -15,7 +14,7 @@ export class Dog extends Phaser.Sprite {
         this.animations.add('sit', [4]);
 
         this.anchor.setTo(.5,.5);
-        this.body.gravity.y = 500;
+        this.body.gravity.y = 400;
         this.body.collideWorldBounds = true;
     }
 
@@ -35,14 +34,5 @@ export class Dog extends Phaser.Sprite {
             this.animations.play('stand', 10, true);
             this.body.velocity.x = 0;
         }
-
-        if (cursors.up.isDown) {
-            this.body.velocity.y = -100;
-
-        } else {
-            this.body.velocity.y = 0;
-        }
-
-
     }
 }
