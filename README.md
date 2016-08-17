@@ -6,14 +6,16 @@ I have a dream and it involves creating a game about my dog. So I've started to 
 
 - Node
 - NPM
+- JSPM (install by using `npm install jspm -g`
+
 
 ## Installation ##
 
-Just run `npm install` to install the dependencies and run `gulp` to start the server.
+Just run `npm install` to install the npm dependencies, then run `jspm install` and run `npm start` to start the server and load the game in the browser.
 
 ## Boilerplate ##
 
-I've downloaded a boilerplate for the initial setup, created by Daniel Belohlavek (https://twitter.com/dbhvk), you can find it here: https://github.com/belohlavek/phaser-es6-boilerplate
+I've downloaded a boilerplate for the initial setup, created by Michael Grenon (@nsipid) and Ashley Grenon (@townsean), you can find it here: https://github.com/thecodingcouple/phaser-es2015.
 
 ## Placeholder graphics ##
 
