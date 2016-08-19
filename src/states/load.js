@@ -10,9 +10,10 @@ export class Load extends Phaser.State {
        this.game.load.spritesheet('dog', '../assets/dog_sprite_sheetx4.gif', 65, 44, 14);
        this.game.load.image('background', '../assets/background.jpg');
        this.game.load.image('blacksquare', '../assets/blacksquare.jpg');
+       this.game.load.image('crate', '../assets/crate.png');
      }
 
     create() {
-        this.game.state.start('menu');
+        this.game.state.start('play');
     }
 }

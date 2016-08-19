@@ -1,7 +1,10 @@
 // src/sprites/dog.js
 
 import Phaser from 'phaser';
+import Global from '../config/global';
+
 const SPEED = 200;
+const GRAVITY = Global.gravity;
 
 export class Dog extends Phaser.Sprite {
     constructor(game, x, y) {
@@ -14,7 +17,7 @@ export class Dog extends Phaser.Sprite {
         this.animations.add('sit', [4]);
 
         this.anchor.setTo(.5,.5);
-        this.body.gravity.y = 400;
+        this.body.gravity.y = GRAVITY;
         this.body.collideWorldBounds = true;
     }
 

@@ -11,7 +11,7 @@ export class Game extends Phaser.Game {
     constructor() {
         super("100", "100", Phaser.AUTO, 'content', { create : () => {
             this.state.add('load', Load);
-            this.state.add('menu', Menu);
+            // this.state.add('menu', Menu);
             this.state.add('play', Play);
             this.state.add('gameover', GameOver);
             this.state.start('load');

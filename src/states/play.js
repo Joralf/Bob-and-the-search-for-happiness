@@ -1,10 +1,10 @@
 // src/states/play.js
 
 import Phaser from 'phaser';
-import { Wizard } from '../sprites/wizard';
 import { Dog } from '../sprites/dog';
 import { Background } from '../sprites/background';
 import { Floor} from '../sprites/floor';
+import { Crate } from '../sprites/crate';
 
 export class Play extends Phaser.State {
     create() {
@@ -19,12 +19,27 @@ export class Play extends Phaser.State {
         this.floor = new Floor(this.game, 0, this.game.height * 0.8);
         this.game.add.existing(this.floor);
 
-        this.cursors = this.game.input.keyboard.createCursorKeys();
+        this.crate = new Crate(this.game, this.game.world.centerX, this.game.world.centerY);
+        this.game.add.existing(this.crate);
 
+        this.cursors = this.game.input.keyboard.createCursorKeys();
+        this.spacebar = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        this.game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
     }
 
     update() {
         this.game.physics.arcade.collide(this.dog, this.floor);
+        this.game.physics.arcade.collide(this.crate, this.floor);
+
+        // @NOTE: add check if pickup
+        this.game.physics.arcade.collide(this.dog, this.crate);
+
+        // @NOTE: refactor to dog class
+        if (this.spacebar.isDown) {
+          this.dog.body.velocity.y = -200;
+        } else {
+          this.dog.body.acceleration.y = 0;
+        }
 
         this.dog.move(this.cursors);
     }
