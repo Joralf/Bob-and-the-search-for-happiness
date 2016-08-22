@@ -32,15 +32,8 @@ export class Play extends Phaser.State {
         this.game.physics.arcade.collide(this.crate, this.floor);
 
         // @NOTE: add check if pickup
-        this.game.physics.arcade.collide(this.dog, this.crate);
+        this.game.physics.arcade.collide(this.dog, this.crate, null, this.dog.pickup);
 
-        // @NOTE: refactor to dog class
-        if (this.spacebar.isDown) {
-          this.dog.body.velocity.y = -200;
-        } else {
-          this.dog.body.acceleration.y = 0;
-        }
-
-        this.dog.move(this.cursors);
+        this.dog.move(this.cursors, this.spacebar);
     }
 }
