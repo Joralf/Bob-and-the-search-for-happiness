@@ -80,12 +80,5 @@ export class Dog extends Phaser.Sprite {
         console.log("destroy object");
         return false;
       }
-
-      // if (spacebar.isDown) {
-      //   console.log("method called, pickup object");
-      // } else {
-      //   console.log("method called, don't pickup object");
-      // }
-
     }
 }
