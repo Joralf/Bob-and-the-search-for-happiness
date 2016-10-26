@@ -1,12 +1,15 @@
 // src/sprites/dog.js
+import { Crate } from '../sprites/crate';
 
 import Phaser from 'phaser';
 import Global from '../config/global';
 
 const SPEED = 200;
 const GRAVITY = Global.gravity;
+
 let pickupAction = false;
 let dogCovered = false;
+let objectCarrying = null;
 
 export class Dog extends Phaser.Sprite {
     constructor(game, x, y) {
@@ -18,67 +21,75 @@ export class Dog extends Phaser.Sprite {
         this.animations.add('stand', [0]);
         this.animations.add('sit', [4]);
         this.animations.add('hide', [12]);
-
         this.anchor.setTo(.5,.5);
         this.body.gravity.y = GRAVITY;
         this.body.collideWorldBounds = true;
+
     }
 
-    move(cursors, spacebar) {
-        // @NOTE1: dirty dirty dirty, maybe use an interface for doing the animations?
-        // @NOTE2: dog specific behaviour should be here, but controls should be in play.js
-        if (cursors.left.isDown) {
-            this.scale.x = 1;
-            this.body.velocity.x = -SPEED;
-            if (dogCovered) {
-              this.animations.play('hide', 10, true);
-            } else {
-              this.animations.play('walk', 10, true);
+    moveLeft() {
+      this.scale.x = 1;
+      this.body.velocity.x = -SPEED;
+      if (dogCovered) {
+        this.animations.play('hide', 10, true);
+      } else {
+        this.animations.play('walk', 10, true);
 
-            }
-        } else if (cursors.right.isDown) {
-            this.scale.x = -1;
-            this.body.velocity.x = SPEED;
-            if (dogCovered) {
-              this.animations.play('hide', 10, true);
-            } else {
-              this.animations.play('walk', 10, true);
-            }
-        } else if (cursors.down.isDown) {
-            this.body.velocity.x = 0;
-            if (dogCovered) {
-              this.animations.play('hide', 10, true);
-            } else {
-              this.animations.play('sit', 10, true);
-            }
-        } else {
-            if (dogCovered) {
-              this.animations.play('hide', 10, true);
-            } else {
-              this.animations.play('stand', 10, true);
-
-            }
-            this.body.velocity.x = 0;
-        }
-
-        if (spacebar.isDown) {
-          pickupAction = true;
-        } else {
-          pickupAction = false;
-        }
+      }
     }
 
-    pickup(dog, object) {
-      console.log("dog", dog);
-      console.log("object", object);
+    moveRight() {
+      this.scale.x = -1;
+      this.body.velocity.x = SPEED;
+      if (dogCovered) {
+        this.animations.play('hide', 10, true);
+      } else {
+        this.animations.play('walk', 10, true);
+      }
+    }
 
-      console.log(pickupAction);
+    duck() {
+      this.body.velocity.x = 0;
+      if (dogCovered) {
+        this.animations.play('hide', 10, true);
+      } else {
+        this.animations.play('sit', 10, true);
+      }
+    }
 
+    stand() {
+      if (dogCovered) {
+        this.animations.play('hide', 10, true);
+      } else {
+        this.animations.play('stand', 10, true);
+
+      }
+      this.body.velocity.x = 0;
+    }
+
+    pickup() {
+      pickupAction = true;
+    }
+
+    release() {
+      pickupAction = false;
+      if (dogCovered) {
+        dogCovered = false;
+        this.crate = new Crate(this.game, this.dog.centerX, this.dog.centerY);
+        this.game.add.existing(this.crate);
+      }
+    }
+
+    pickupObject(dog, object) {
       if (pickupAction) {
         object.destroy();
         dogCovered = true;
-        console.log("destroy object");
         return false;
       }
+    }
+
+    jump() {
+      console.log("jump");
+      this.body.velocity.y = -220;
     }
 }

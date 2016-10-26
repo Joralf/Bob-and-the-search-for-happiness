@@ -13,18 +13,26 @@ export class Play extends Phaser.State {
         this.background = new Background(this.game, 0, 0);
         this.game.add.existing(this.background);
 
-        this.dog = new Dog(this.game, 350, this.game.height * 0.8 - 200);
+        this.dog = new Dog(this.game, 350, this.game.height * 0.8 - 20);
         this.game.add.existing(this.dog);
 
         this.floor = new Floor(this.game, 0, this.game.height * 0.8);
         this.game.add.existing(this.floor);
 
-        this.crate = new Crate(this.game, this.game.world.centerX, this.game.world.centerY);
+        this.crate = new Crate(this.game, this.game.world.centerX, this.game.height * 0.8 - 25);
         this.game.add.existing(this.crate);
 
-        this.cursors = this.game.input.keyboard.createCursorKeys();
-        this.spacebar = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         this.game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
+
+
+        this.cursors = this.game.input.keyboard.createCursorKeys();
+        this.pickupKey = this.game.input.keyboard.addKey(Phaser.Keyboard.F);
+        this.pickupKey.onDown.add(this.dog.pickup, this);
+        this.pickupKey.onUp.add(this.dog.release, this)
+
+        this.spacebar = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        this.spacebar.onDown.add(this.dog.jump, this.dog);
+
     }
 
     update() {
@@ -32,8 +40,16 @@ export class Play extends Phaser.State {
         this.game.physics.arcade.collide(this.crate, this.floor);
 
         // @NOTE: add check if pickup
-        this.game.physics.arcade.collide(this.dog, this.crate, null, this.dog.pickup);
+        this.game.physics.arcade.collide(this.dog, this.crate, null, this.dog.pickupObject);
 
-        this.dog.move(this.cursors, this.spacebar);
+        if (this.cursors.left.isDown) {
+          this.dog.moveLeft()
+        } else if (this.cursors.right.isDown) {
+          this.dog.moveRight()
+        } else if (this.cursors.down.isDown) {
+          this.dog.duck()
+        } else {
+          this.dog.stand()
+        }
     }
 }
