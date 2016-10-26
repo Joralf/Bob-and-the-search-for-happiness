@@ -21,6 +21,8 @@ export class Dog extends Phaser.Sprite {
         this.animations.add('stand', [0]);
         this.animations.add('sit', [4]);
         this.animations.add('hide', [12]);
+        this.animations.add('jump', [13]);
+
         this.anchor.setTo(.5,.5);
         this.body.gravity.y = GRAVITY;
         this.body.collideWorldBounds = true;
@@ -34,7 +36,6 @@ export class Dog extends Phaser.Sprite {
         this.animations.play('hide', 10, true);
       } else {
         this.animations.play('walk', 10, true);
-
       }
     }
 
@@ -62,7 +63,6 @@ export class Dog extends Phaser.Sprite {
         this.animations.play('hide', 10, true);
       } else {
         this.animations.play('stand', 10, true);
-
       }
       this.body.velocity.x = 0;
     }
@@ -89,7 +89,6 @@ export class Dog extends Phaser.Sprite {
     }
 
     jump() {
-      console.log("jump");
-      this.body.velocity.y = -220;
+      this.body.velocity.y = -190;
     }
 }
