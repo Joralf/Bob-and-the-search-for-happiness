@@ -11,6 +11,7 @@ export class Load extends Phaser.State {
        this.game.load.image('background', '../assets/background.jpg');
        this.game.load.image('blacksquare', '../assets/blacksquare.jpg');
        this.game.load.image('crate', '../assets/cratesmall.png');
+       this.game.load.image('tree', '../assets/tree.png')
      }
 
     create() {
