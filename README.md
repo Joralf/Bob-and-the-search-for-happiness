@@ -20,7 +20,9 @@ I've downloaded a boilerplate for the initial setup, created by Michael Grenon (
 ## Placeholder graphics ##
 
 I've used some placeholder graphics to speed up the development. They can be found here:
-http://opengameart.org/content/dog-sprites (from https://twitter.com/Shepardskin)
-http://imgur.com/gallery/SELjK (from http://imgur.com/user/Khanecz)
+
+Dog: http://opengameart.org/content/dog-sprites (from https://twitter.com/Shepardskin)
+Background: http://imgur.com/gallery/SELjK (from http://imgur.com/user/Khanecz)
+Tree: http://opengameart.org/content/the-pixel-tree
 
 In a later stage I'll replace the images with my own art :)
